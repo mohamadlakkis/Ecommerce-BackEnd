@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  customers-service:
+    build:
+      context: ./services/customers
+    container_name: customers-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - customers-db
+    environment:
+      - DB_HOST=customers-db
+      - DB_NAME=customers_db
+      - DB_USER=admin
+      - DB_PASSWORD=adminpass
+
+  inventory-service:
+    build:
+      context: ./services/inventory
+    container_name: inventory-service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - customers-db
+    environment:
+      - DB_HOST=customers-db
+      - DB_NAME=customers_db
+      - DB_USER=admin
+      - DB_PASSWORD=adminpass
+  sales-service:
+    build:
+      context: ./services/sales
+    container_name: sales-service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - customers-db
+    environment:
+      - DB_HOST=customers-db
+      - DB_NAME=customers_db
+      - DB_USER=admin
+      - DB_PASSWORD=adminpass
+  reviews-service:
+    build:
+      context: ./services/reviews
+    container_name: reviews-service
+    ports:
+      - "5004:5004"
+    depends_on:
+      - customers-db
+    environment:
+      - DB_HOST=customers-db
+      - DB_NAME=customers_db
+      - DB_USER=admin
+      - DB_PASSWORD=adminpass
+
+  customers-db:
+    image: postgres:latest
+    container_name: customers-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpass
+      POSTGRES_DB: customers_db
+  

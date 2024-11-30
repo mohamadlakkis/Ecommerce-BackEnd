@@ -1,18 +1,19 @@
 from flask import Flask, request, jsonify
 import psycopg2
 from psycopg2 import sql
-
-app = Flask(__name__)
+import os
 
 '''Database connection'''
 def get_db_connection():
     conn = psycopg2.connect(
-        host="localhost",
-        database="customers_db",
-        user="admin",
-        password="adminpass"
+        host=os.getenv('DB_HOST', 'localhost'),  # Use Docker container name as host
+        database=os.getenv('DB_NAME', 'customers_db'),
+        user=os.getenv('DB_USER', 'admin'),
+        password=os.getenv('DB_PASSWORD', 'adminpass')
     )
     return conn
+
+app = Flask(__name__)
 
 '''Service 1'''
 @app.route('/customers/register', methods=['POST'])
@@ -193,5 +194,6 @@ def deduct_wallet(username):
     conn.close()
     return jsonify({"message": "Wallet deduction successful"}), 200
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

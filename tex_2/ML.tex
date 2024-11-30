@@ -1,0 +1,391 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\geometry{margin=1in}
+
+\title{E-commerce Backend Documentation}
+\author{Developed by Mohamad Lakkis}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+
+\section{Overview}
+The E-commerce Backend project consists of four independent services running on Docker containers, each assigned a specific port. These services communicate with a shared PostgreSQL database to provide functionalities such as customer management, inventory management, sales processing, and review handling.
+\textit{Note: The GitHub Repository for this project is available at: \href{https://github.com/mohamadlakkis/Ecommerce-BackEnd}{https://github.com/mohamadlakkis/Ecommerce-BackEnd}}
+\section{Services and APIs (This will cover points 1 to 6 from the requirements)}
+\textit{1. Note: Here you can find general details on each API of each servive, to see the examples and comments as requested in point 5, check the file "/api\_endpoints.md" which is available in each sub-diretory of each service}\\
+\textit{2. Note: I chose to use as my database "PostgreSQL" as an image from docker hub which is running ona dedicated container port: 5432, and for each service I have created a seperate table in the database. The details of the tables are also available in the following sections}\\
+\textit{3. Note: Each service is running on a different port, and all of the necessary details are available in the following sections, \underline{BUT} if you want to see the composed and seperate docker files, they are avilable in "Dockerfile" in each sub-directory for each service. As for the docker-compose.yml you can find it in the parent directory of the project's folder: "docker-compose.yml"}
+
+\subsection{Customers Service}
+\subsubsection{Description}
+Manages customer information, including registration, account updates, and wallet management.
+\subsubsection{APIs}
+\begin{longtable}{|p{4cm}|p{2cm}|p{7cm}|}
+\hline
+\textbf{API} & \textbf{Method} & \textbf{Description} \\
+\hline
+Register Customer & POST & Registers a new customer. \\
+\hline
+Delete Customer & DELETE & Deletes a customer by username. \\
+\hline
+Update Customer Info & PATCH & Updates customer information. \\
+\hline
+Get All Customers & GET & Retrieves all customer records. \\
+\hline
+Get Customer by Username & GET & Retrieves details of a specific customer. \\
+\hline
+Charge Wallet & PUT & Adds funds to the customer's wallet. \\
+\hline
+Deduct Wallet Funds & PUT & Deducts funds from the customer's wallet. \\
+\hline
+\end{longtable}
+
+\subsubsection{Running Port}
+Port: \textbf{5001}
+
+\subsubsection{Database Structure}
+\begin{longtable}{|p{3cm}|p{3cm}|p{8cm}|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\
+\hline
+id & SERIAL (PK) & Unique identifier for the customer. \\
+\hline
+full\_name & VARCHAR(100) & Full name of the customer. \\
+\hline
+username & VARCHAR(50) & Unique username. \\
+\hline
+password & VARCHAR(100) & Encrypted password. \\
+\hline
+age & INTEGER & Age of the customer. \\
+\hline
+address & VARCHAR(200) & Address of the customer. \\
+\hline
+gender & VARCHAR(10) & Gender of the customer. \\
+\hline
+marital\_status & VARCHAR(20) & Marital status of the customer. \\
+\hline
+wallet\_balance & NUMERIC & Available funds in the customer's wallet. \\
+\hline
+\end{longtable}
+\subsubsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/1.png}
+  \caption{Customer registration}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/2.png}
+  \caption{Delete customer}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/3.png}
+  \caption{Update customer information}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/4.png}
+  \caption{Get all customers}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/5.png}
+  \caption{Get customer per username}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/6.png}
+  \caption{Charge customer wallet in dollars}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/7.png}
+  \caption{Deduct wallet funds}
+\end{figure}
+\subsection{Inventory Service}
+\subsubsection{Description}
+Handles inventory management, including adding, updating, and removing goods.
+
+\subsubsection{APIs}
+\begin{longtable}{|p{4cm}|p{2cm}|p{7cm}|}
+\hline
+\textbf{API} & \textbf{Method} & \textbf{Description} \\
+\hline
+Add Goods & POST & Adds a new product to the inventory. \\
+\hline
+Deduct Goods & PUT & Removes items from stock. \\
+\hline
+Update Goods & PATCH & Updates product details. \\
+\hline
+\end{longtable}
+
+\subsubsection{Running Port}
+Port: \textbf{5002}
+
+\subsubsection{Database Structure}
+\begin{longtable}{|p{3cm}|p{3cm}|p{8cm}|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\
+\hline
+id & SERIAL (PK) & Unique identifier for the product. \\
+\hline
+name & VARCHAR(100) & Name of the product. \\
+\hline
+category & VARCHAR(50) & Category of the product (e.g., food). \\
+\hline
+price & NUMERIC & Price per item. \\
+\hline
+description & TEXT & Detailed description of the product. \\
+\hline
+count & INTEGER & Available stock count. \\
+\hline
+\end{longtable}
+\subsubsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/8.png}
+  \caption{Add goods}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/9.png}
+  \caption{Deduct goods}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/10.png}
+  \caption{Update goods}
+\end{figure}
+
+
+
+\subsection{Sales Service}
+\subsubsection{Description}
+Manages the sale of goods, including processing purchases and tracking historical sales.
+
+\subsubsection{APIs}
+\begin{longtable}{|p{4cm}|p{2cm}|p{7cm}|}
+\hline
+\textbf{API} & \textbf{Method} & \textbf{Description} \\
+\hline
+Display Goods & GET & Lists all available goods with prices. \\
+\hline
+Get Goods Details & GET & Retrieves detailed information about a product. \\
+\hline
+Process Sale & POST & Processes a sale by deducting stock and funds. \\
+\hline
+Get Purchase History & GET & Retrieves historical purchases for a customer. \\
+\hline
+\end{longtable}
+
+\subsubsection{Running Port}
+Port: \textbf{5003}
+
+\subsubsection{Database Structure}
+\begin{longtable}{|p{3cm}|p{3cm}|p{8cm}|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\
+\hline
+id & SERIAL (PK) & Unique identifier for the sale. \\
+\hline
+customer\_id & INTEGER (FK) & References the customer making the purchase. \\
+\hline
+good\_id & INTEGER (FK) & References the product being purchased. \\
+\hline
+quantity & INTEGER & Number of items purchased. \\
+\hline
+total\_price & NUMERIC & Total price of the purchase. \\
+\hline
+sale\_date & TIMESTAMP & Date and time of the purchase. \\
+\hline
+\end{longtable}
+\subsubsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/11.png}
+  \caption{Display goods}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/12.png}
+  \caption{Get goods details}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/13.png}
+  \caption{Process sale}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/14.png}
+  \caption{Get purchase history}
+\end{figure}
+
+
+\subsection{Reviews Service}
+\subsubsection{Description}
+Manages product reviews and ratings submitted by customers.
+
+\subsubsection{APIs}
+\begin{longtable}{|p{4cm}|p{2cm}|p{7cm}|}
+\hline
+\textbf{API} & \textbf{Method} & \textbf{Description} \\
+\hline
+Submit Review & POST & Submits a review for a product. \\
+\hline
+Update Review & PATCH & Updates a specific review. \\
+\hline
+Delete Review & DELETE & Deletes a specific review. \\
+\hline
+Get Product Reviews & GET & Retrieves reviews for a specific product. \\
+\hline
+Get Customer Reviews & GET & Retrieves all reviews submitted by a customer. \\
+\hline
+Moderate Review & PATCH & Flags or approves a review. \\
+\hline
+Get Review Details & GET & Retrieves details of a specific review. \\
+\hline
+\end{longtable}
+
+\subsubsection{Running Port}
+Port: \textbf{5004}
+
+\subsubsection{Database Structure}
+\begin{longtable}{|p{3cm}|p{3cm}|p{8cm}|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\
+\hline
+id & SERIAL (PK) & Unique identifier for the review. \\
+\hline
+customer\_id & INTEGER (FK) & References the customer submitting the review. \\
+\hline
+product\_id & INTEGER (FK) & References the reviewed product. \\
+\hline
+rating & INTEGER & Rating given to the product (1-5). \\
+\hline
+comment & TEXT & Customer's feedback. \\
+\hline
+status & VARCHAR(20) & Status of the review (e.g., pending). \\
+\hline
+review\_date & TIMESTAMP & Date and time the review was submitted. \\
+\hline
+\end{longtable}
+\subsubsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/15.png}
+  \caption{Submit review}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/16.png}
+  \caption{Update review}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/17.png}
+  \caption{Delete review}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/18.png}
+  \caption{Get product reviews}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/19.png}
+  \caption{Get customer reviews}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/20.png}
+  \caption{Moderate review}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/21.png}
+  \caption{Get review details}
+\end{figure}
+
+\section{Error Handling and Validation}
+\subsection{Error Management}
+Errors in the system are managed to ensure smooth operations and meaningful responses to clients. The following strategies are implemented:
+
+\begin{enumerate}
+    \item \textbf{HTTP Status Codes}
+    \begin{itemize}
+        \item \textbf{2xx Success Codes:} Indicate successful operations (e.g., \texttt{200 OK}, \texttt{201 Created}).
+        \item \textbf{4xx Client Errors:} Inform the client of issues with their request:
+        \begin{itemize}
+            \item \texttt{400 Bad Request:} Returned for missing or invalid fields in the request payload.
+            \item \texttt{404 Not Found:} Returned when the requested resource does not exist.
+        \end{itemize}
+        \item \textbf{5xx Server Errors:} Catch unexpected errors during processing (e.g., database connection issues).
+    \end{itemize}
+
+    \item \textbf{Exception Handling}
+    \begin{itemize}
+        \item \textbf{Database Exceptions:} Managed using \texttt{try-except} blocks to handle SQL errors and ensure proper rollbacks.
+        \item \textbf{Flask-Specific Exceptions:} Use Flask’s built-in error handling to provide user-friendly error messages.
+    \end{itemize}
+
+    \item \textbf{Fallback Mechanism:} Unexpected errors return a generic \texttt{500 Internal Server Error} during production, with debug information enabled during development.
+\end{enumerate}
+
+\subsection{Validation}
+The system includes comprehensive validation to ensure data integrity and appropriate operations. Below are the implemented validations:
+
+\begin{enumerate}
+    \item \textbf{Request Payload Validation:}
+    \begin{itemize}
+        \item Each API validates incoming payloads to ensure required fields are present and properly formatted.
+        \item Examples include:
+        \begin{itemize}
+            \item Customers Service: Ensures username uniqueness and verifies mandatory fields like \texttt{username}, \texttt{password}, and \texttt{age}.
+            \item Sales Service: Validates wallet balance and product availability before processing a sale.
+            \item Reviews Service: Checks that the \texttt{rating} is between 1 and 5.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Database Constraints:}
+    \begin{itemize}
+        \item Enforced at the schema level:
+        \begin{itemize}
+            \item Primary Keys prevent duplicate entries.
+            \item Foreign Keys ensure relationships between tables are respected (e.g., \texttt{customer\_id} in \texttt{sales\_history} must exist in \texttt{customers} table).
+            \item Check Constraints validate numeric ranges (e.g., \texttt{rating} between 1 and 5).
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Error Response for Missing Resources:}
+    \begin{itemize}
+        \item APIs return \texttt{404 Not Found} when:
+        \begin{itemize}
+            \item A customer, product, or review cannot be found.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Status Validation in Reviews:}
+    \begin{itemize}
+        \item Only allows valid statuses (\texttt{approved}, \texttt{flagged}) in the moderation process.
+    \end{itemize}
+
+    \item \textbf{Flask-Level Validation:}
+    \begin{itemize}
+        \item Enforces clean input, such as ensuring numeric IDs (e.g., \texttt{<int:review\_id>}).
+    \end{itemize}
+\end{enumerate}
+
+\section{Testing (This will cover point 7 from the requirements)}
+\end{document}

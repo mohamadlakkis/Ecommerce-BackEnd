@@ -1,3 +1,21 @@
+from flask import Flask, request, jsonify
+import psycopg2
+from psycopg2 import sql
+import os
+
+
+app = Flask(__name__)
+
+'''Database connection'''
+def get_db_connection():
+    conn = psycopg2.connect(
+        host=os.getenv('DB_HOST', 'localhost'), 
+        database=os.getenv('DB_NAME', 'customers_db'),
+        user=os.getenv('DB_USER', 'admin'),
+        password=os.getenv('DB_PASSWORD', 'adminpass')
+    )
+    return conn
+
 '''Service 2'''
 @app.route('/inventory/add', methods=['POST'])
 def add_goods():
@@ -92,3 +110,5 @@ def update_goods(item_id):
 
     return jsonify({"message": "Item updated successfully"}), 200
 
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5002, debug=True)
