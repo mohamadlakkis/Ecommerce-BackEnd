@@ -21,7 +21,7 @@
 \section{Overview}
 The E-commerce Backend project consists of four independent services running on Docker containers, each assigned a specific port. These services communicate with a shared PostgreSQL database to provide functionalities such as customer management, inventory management, sales processing, and review handling.
 \textit{Note: The GitHub Repository for this project is available at: \href{https://github.com/mohamadlakkis/Ecommerce-BackEnd}{https://github.com/mohamadlakkis/Ecommerce-BackEnd}}
-\section{Services and APIs (This will cover points 1 to 6 from the requirements)}
+\section{Services and APIs (This will cover points 1 to 6 + 10 from the requirements)}
 \textit{1. Note: Here you can find general details on each API of each servive, to see the examples and comments as requested in point 5, check the file "/api\_endpoints.md" which is available in each sub-diretory of each service}\\
 \textit{2. Note: I chose to use as my database "PostgreSQL" as an image from docker hub which is running ona dedicated container port: 5432, and for each service I have created a seperate table in the database. The details of the tables are also available in the following sections}\\
 \textit{3. Note: Each service is running on a different port, and all of the necessary details are available in the following sections, \underline{BUT} if you want to see the composed and seperate docker files, they are avilable in "Dockerfile" in each sub-directory for each service. As for the docker-compose.yml you can find it in the parent directory of the project's folder: "docker-compose.yml"}
@@ -76,7 +76,10 @@ marital\_status & VARCHAR(20) & Marital status of the customer. \\
 \hline
 wallet\_balance & NUMERIC & Available funds in the customer's wallet. \\
 \hline
+role & VARCHAR(20) & Role of the customer, e.g., \texttt{customer} or \texttt{emp}. \\
+\hline
 \end{longtable}
+
 \subsubsection{Postman Testing}
 \begin{figure}[H]
   \centering
@@ -386,6 +389,144 @@ The system includes comprehensive validation to ensure data integrity and approp
         \item Enforces clean input, such as ensuring numeric IDs (e.g., \texttt{<int:review\_id>}).
     \end{itemize}
 \end{enumerate}
+\section{User Authentication and Hashing added to the passwords (Point 12)}
+\textit{1. Note: So what I did here is that first each customer will have to enter a password when registering, and this password will be hashed using the "bcrypt" library, and then stored in the database. This way the password is secure and not stored in plain text.}\\
+\textit{2. Note: I have also added a new field in the customers table called "role" which is defaulted to "user", and only the customers with the role "emp" can delete, submit and update reviews, as requested from \underline{POINT 12}}\\
+\subsection{Implementation Details}
+\begin{itemize}
+    \item \textbf{Input Validation}: The API verifies that all mandatory fields (e.g., full name, username, password, age, address, gender, and marital status) are provided. If any field is missing, an error response is returned to the user.
+    \item \textbf{Password Hashing}: To ensure the security of user credentials, the password is hashed before being stored in the database. The \texttt{bcrypt} library is used to generate a secure hashed version of the password using the \texttt{gensalt()} method.
+    \item \textbf{Database Interaction}: The API inserts the user’s data into the \texttt{customers} table, including the hashed password and role (defaulted to \texttt{'user'}).
+    \item \textbf{Error Handling}: The implementation handles database-specific errors such as duplicate usernames, ensuring appropriate responses are returned to the client.
+    \item Now \underline{NOT} any user can delete and submit and update reviews only the ones with the "role" = "emp", they need to provide the correct username and password to be able to do so.
+\end{itemize}
 
+\subsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/22.png}
+  \caption{Registering a new customer role "user"}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/23.png}
+  \caption{Login for a customer (this is usrful if we had an interface for the customers to login, but for now it is not used)}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/24.png}
+  \caption{Registering a new employee}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/25.png}
+  \caption{Attempting to submit a review without the correct role (remember jad is just a customer not an employee, and he won't be able to submit a review) \textbf{NOTE: THAT HERE I COULD HAVE CHANGED THE ROLE TO MAYBE PURCAHSED OR SOMETHING TO ALLOW THE CUSTOMER TO SUBMIT A REVIEW, SINCE IT MAKES SENSE THAT A CUSTOMER CAN SUBMIT A REVIEW, BUT for now I am just following the requirements, and showing that it works, the same is applied if we wanted to do the latter}}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/26.png}
+  \caption{Submitting a review with the correct role(remember ML is employee and he can submit a review)}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/27.png}
+  \caption{Updating a review with the correct role}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/28.png}
+  \caption{Deleting a review with the correct role}
+\end{figure}
+\subsection{Hashing passwords}
+\textit{1. Note: remember the passwords we have put for ML and JL, before, now we will take a look at the table to see how they are hashed!}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/29.png}
+  \caption{The passwords are hashed!}
+\end{figure}
+
+
+\section{Validation and Sanitization (point 11)}
+\textit{1. Note: I am just showing one part of the code as a proof, in the whole code you can see how the inputs are checcked inside the functions}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/30.png}
+  \caption{Validation and Sanitization}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/31.png}
+  \caption{Validation and Sanitization (another example) there is plenty more in the full codes}
+\end{figure}
+\section{Moderating (point 13)}
+\textit{1. Note: I did similar to authenticator before submitting a review, the user needs to have the role "emp" to able to moderation}
+\subsection{Implementation Details}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/32.png}
+  \caption{Moderating a review (the modified code)}
+\end{figure}
+\subsection{Postman Testing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/33.png}
+  \caption{An example on Postman, using Moderating with a user that has the role "emp"(Remember ML is an employee)}
+\end{figure}
 \section{Testing (This will cover point 7 from the requirements)}
+\textit{1. Note: all of the tests are available in the directory "test" in the submission}
+\subsection{Customers API}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/34.png}
+  \caption{Testing the Customers API}
+\end{figure}
+\subsection{Inentory API}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/35.png}
+  \caption{Testing the Inventory API}
+\end{figure}
+\subsection{reviews API}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/36.png}
+  \caption{Testing the Reviews API}
+\end{figure}
+\subsection{Sales API}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/37.png}
+  \caption{Testing the Sales API}
+\end{figure}
+\section{Performance, memory, and code coverage profiling}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/38.png}
+  \caption{memory usage graphs}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/39.png}
+  \caption{code coverage}
+\end{figure}
+\section{Documentation HTML}
+\textit{1. Note: Here I provided only a glimpse of the documentation for the full documentation go to "build/html/index.html" in the submission}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/40.png}
+  \caption{Documentation HTML (1)}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/41.png}
+  \caption{Documentation HTML (2)}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/42.png}
+  \caption{Documentation HTML (3)}
+\end{figure}
+\section{Conclusion}
+for the rest please see the code :) \\ 
+very nice journey and thank you for your effort and time, in correcting it and reading it, I hope you have a great day!\\
 \end{document}
