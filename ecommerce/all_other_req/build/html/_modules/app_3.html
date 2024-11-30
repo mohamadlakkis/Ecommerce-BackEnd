@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>app_3 &mdash; Mohamad Lakkis Ecommerce backend  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Mohamad Lakkis Ecommerce backend
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Services</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">apps</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mohamad Lakkis Ecommerce backend</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">app_3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for app_3</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">from</span> <span class="nn">psycopg2</span> <span class="kn">import</span> <span class="n">sql</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Database connection&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="get_db_connection">
+<a class="viewcode-back" href="../app_3.html#app_3.get_db_connection">[docs]</a>
+<span class="k">def</span> <span class="nf">get_db_connection</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span><span class="p">),</span> 
+        <span class="n">database</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;customers_db&#39;</span><span class="p">),</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_USER&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">),</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;adminpass&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">conn</span></div>
+
+
+<span class="sd">&#39;&#39;&#39;Service 4&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">bcrypt</span>
+
+<span class="sd">&#39;&#39;&#39;Verify username and password&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="authenticate_user">
+<a class="viewcode-back" href="../app_3.html#app_3.authenticate_user">[docs]</a>
+<span class="k">def</span> <span class="nf">authenticate_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetch hashed password and role</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT password, role FROM customers WHERE username = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,))</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>  <span class="c1"># User not found</span>
+
+        <span class="n">hashed_password</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">user</span>
+
+        <span class="c1"># Validate password</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">checkpw</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">hashed_password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>  <span class="c1"># Invalid password</span>
+
+        <span class="k">return</span> <span class="n">username</span><span class="p">,</span> <span class="n">role</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="submit_review">
+<a class="viewcode-back" href="../app_3.html#app_3.submit_review">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/submit&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">submit_review</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Submit a review for a product.</span>
+
+<span class="sd">    Request JSON:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;username&quot;: &quot;employee_username&quot;,</span>
+<span class="sd">            &quot;password&quot;: &quot;employee_password&quot;,</span>
+<span class="sd">            &quot;product_id&quot;: 1,</span>
+<span class="sd">            &quot;rating&quot;: 5,</span>
+<span class="sd">            &quot;comment&quot;: &quot;Great product!&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 201 Created: {&quot;message&quot;: &quot;Review submitted successfully&quot;}</span>
+<span class="sd">            - 400 Bad Request: {&quot;error&quot;: &quot;Missing fields&quot; or &quot;Rating must be between 1 and 5&quot;}</span>
+<span class="sd">            - 401 Unauthorized: {&quot;error&quot;: &quot;Invalid username or password&quot;}</span>
+<span class="sd">            - 403 Forbidden: {&quot;error&quot;: &quot;Unauthorized. Only employees can submit reviews.&quot;}</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Customer not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+    <span class="n">product_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_id&#39;</span><span class="p">)</span>
+    <span class="n">rating</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">username</span> <span class="ow">and</span> <span class="n">password</span> <span class="ow">and</span> <span class="n">product_id</span> <span class="ow">and</span> <span class="n">rating</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Missing fields&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">rating</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Rating must be between 1 and 5&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Authenticate user</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid username or password&quot;</span><span class="p">}),</span> <span class="mi">401</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="o">!=</span> <span class="s1">&#39;emp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorized. Only employees can submit reviews.&quot;</span><span class="p">}),</span> <span class="mi">403</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetch customer ID</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id FROM customers WHERE username = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,))</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">customer</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+
+        <span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Insert review</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            INSERT INTO reviews (customer_id, product_id, rating, comment)</span>
+<span class="sd">            VALUES (%s, %s, %s, %s)</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Review submitted successfully&quot;</span><span class="p">}),</span> <span class="mi">201</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="update_review">
+<a class="viewcode-back" href="../app_3.html#app_3.update_review">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/&lt;int:review_id&gt;/update&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">update_review</span><span class="p">(</span><span class="n">review_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update an existing review.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        review_id (int): The ID of the review to update.</span>
+
+<span class="sd">    Request JSON:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;username&quot;: &quot;employee_username&quot;,</span>
+<span class="sd">            &quot;password&quot;: &quot;employee_password&quot;,</span>
+<span class="sd">            &quot;rating&quot;: 4,</span>
+<span class="sd">            &quot;comment&quot;: &quot;Updated comment&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: {&quot;message&quot;: &quot;Review updated successfully&quot;}</span>
+<span class="sd">            - 400 Bad Request: {&quot;error&quot;: &quot;Username and password are required&quot; or &quot;No fields to update&quot;}</span>
+<span class="sd">            - 401 Unauthorized: {&quot;error&quot;: &quot;Invalid username or password&quot;}</span>
+<span class="sd">            - 403 Forbidden: {&quot;error&quot;: &quot;Unauthorized. Only employees can update reviews.&quot;}</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Review not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+    <span class="n">rating</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">username</span> <span class="ow">and</span> <span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Username and password are required&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">rating</span> <span class="ow">or</span> <span class="n">comment</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No fields to update&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="k">if</span> <span class="n">rating</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">rating</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Rating must be between 1 and 5&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Authenticate user</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid username or password&quot;</span><span class="p">}),</span> <span class="mi">401</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="o">!=</span> <span class="s1">&#39;emp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorized. Only employees can update reviews.&quot;</span><span class="p">}),</span> <span class="mi">403</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Update review</span>
+        <span class="n">updates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">rating</span><span class="p">:</span>
+            <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;rating = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rating</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comment</span><span class="p">:</span>
+            <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;comment = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
+
+        <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review_id</span><span class="p">)</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;UPDATE reviews SET </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">updates</span><span class="p">)</span><span class="si">}</span><span class="s2"> WHERE id = %s&quot;</span><span class="p">,</span>
+            <span class="n">values</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Review not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Review updated successfully&quot;</span><span class="p">}),</span> <span class="mi">200</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="delete_review">
+<a class="viewcode-back" href="../app_3.html#app_3.delete_review">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/&lt;int:review_id&gt;/delete&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete_review</span><span class="p">(</span><span class="n">review_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete a review by ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        review_id (int): The ID of the review to delete.</span>
+
+<span class="sd">    Request JSON:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;username&quot;: &quot;employee_username&quot;,</span>
+<span class="sd">            &quot;password&quot;: &quot;employee_password&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: {&quot;message&quot;: &quot;Review deleted successfully&quot;}</span>
+<span class="sd">            - 400 Bad Request: {&quot;error&quot;: &quot;Username and password are required&quot;}</span>
+<span class="sd">            - 401 Unauthorized: {&quot;error&quot;: &quot;Invalid username or password&quot;}</span>
+<span class="sd">            - 403 Forbidden: {&quot;error&quot;: &quot;Unauthorized. Only employees can delete reviews.&quot;}</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Review not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">username</span> <span class="ow">and</span> <span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Username and password are required&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid username or password&quot;</span><span class="p">}),</span> <span class="mi">401</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="o">!=</span> <span class="s1">&#39;emp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorized. Only employees can delete reviews.&quot;</span><span class="p">}),</span> <span class="mi">403</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM reviews WHERE id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">review_id</span><span class="p">,))</span>
+        <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Review not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Review deleted successfully&quot;</span><span class="p">}),</span> <span class="mi">200</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_product_reviews">
+<a class="viewcode-back" href="../app_3.html#app_3.get_product_reviews">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/product/&lt;int:product_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_product_reviews</span><span class="p">(</span><span class="n">product_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all reviews for a specific product.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        product_id (int): The ID of the product.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: List of reviews:</span>
+<span class="sd">                [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;username&quot;: &quot;customer_username&quot;,</span>
+<span class="sd">                        &quot;rating&quot;: 5,</span>
+<span class="sd">                        &quot;comment&quot;: &quot;Excellent product!&quot;,</span>
+<span class="sd">                        &quot;review_date&quot;: &quot;2024-11-29&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                ]</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Product not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            SELECT customers.username, reviews.rating, reviews.comment, reviews.review_date</span>
+<span class="sd">            FROM reviews</span>
+<span class="sd">            JOIN customers ON reviews.customer_id = customers.id</span>
+<span class="sd">            WHERE reviews.product_id = %s</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">product_id</span><span class="p">,)</span>
+        <span class="p">)</span>
+        <span class="n">reviews</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s2">&quot;review_date&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">reviews</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="mi">200</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_customer_reviews">
+<a class="viewcode-back" href="../app_3.html#app_3.get_customer_reviews">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/customer/&lt;username&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_customer_reviews</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all reviews submitted by a specific customer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (str): The username of the customer.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: List of reviews:</span>
+<span class="sd">                [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;product_name&quot;: &quot;Product A&quot;,</span>
+<span class="sd">                        &quot;rating&quot;: 5,</span>
+<span class="sd">                        &quot;comment&quot;: &quot;Loved it!&quot;,</span>
+<span class="sd">                        &quot;review_date&quot;: &quot;2024-11-29&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                ]</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Customer not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetch customer ID</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id FROM customers WHERE username = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,))</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">customer</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+
+        <span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Fetch reviews</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            SELECT inventory.name, reviews.rating, reviews.comment, reviews.review_date</span>
+<span class="sd">            FROM reviews</span>
+<span class="sd">            JOIN inventory ON reviews.product_id = inventory.id</span>
+<span class="sd">            WHERE reviews.customer_id = %s</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">customer_id</span><span class="p">,)</span>
+        <span class="p">)</span>
+        <span class="n">reviews</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;product_name&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s2">&quot;review_date&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">reviews</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="mi">200</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="moderate_review">
+<a class="viewcode-back" href="../app_3.html#app_3.moderate_review">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/&lt;int:review_id&gt;/moderate&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">moderate_review</span><span class="p">(</span><span class="n">review_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Moderate a review by ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        review_id (int): The ID of the review to moderate.</span>
+
+<span class="sd">    Request JSON:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;username&quot;: &quot;employee_username&quot;,</span>
+<span class="sd">            &quot;password&quot;: &quot;employee_password&quot;,</span>
+<span class="sd">            &quot;status&quot;: &quot;approved&quot; or &quot;flagged&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: {&quot;message&quot;: &quot;Review status updated to &#39;approved&#39; or &#39;flagged&#39;&quot;}</span>
+<span class="sd">            - 400 Bad Request: {&quot;error&quot;: &quot;Username, password, and status are required&quot; or &quot;Invalid status&quot;}</span>
+<span class="sd">            - 401 Unauthorized: {&quot;error&quot;: &quot;Invalid username or password&quot;}</span>
+<span class="sd">            - 403 Forbidden: {&quot;error&quot;: &quot;Unauthorized. Only employees can moderate reviews.&quot;}</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Review not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">username</span> <span class="ow">and</span> <span class="n">password</span> <span class="ow">and</span> <span class="n">status</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Username, password, and status are required&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s1">&#39;flagged&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid status. Allowed values are &#39;approved&#39; or &#39;flagged&#39;&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid username or password&quot;</span><span class="p">}),</span> <span class="mi">401</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="o">!=</span> <span class="s1">&#39;emp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorized. Only employees can moderate reviews.&quot;</span><span class="p">}),</span> <span class="mi">403</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;UPDATE reviews SET status = </span><span class="si">%s</span><span class="s2"> WHERE id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">review_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Review not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Review status updated to &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">}),</span> <span class="mi">200</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Failed to moderate review: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}),</span> <span class="mi">500</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_review_details">
+<a class="viewcode-back" href="../app_3.html#app_3.get_review_details">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/&lt;int:review_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_review_details</span><span class="p">(</span><span class="n">review_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get details of a specific review by ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        review_id (int): The ID of the review.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON:</span>
+<span class="sd">            - 200 OK: Detailed review information:</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;username&quot;: &quot;customer_username&quot;,</span>
+<span class="sd">                    &quot;product_name&quot;: &quot;Product A&quot;,</span>
+<span class="sd">                    &quot;rating&quot;: 5,</span>
+<span class="sd">                    &quot;comment&quot;: &quot;Amazing product!&quot;,</span>
+<span class="sd">                    &quot;status&quot;: &quot;approved&quot;,</span>
+<span class="sd">                    &quot;review_date&quot;: &quot;2024-11-29&quot;</span>
+<span class="sd">                }</span>
+<span class="sd">            - 404 Not Found: {&quot;error&quot;: &quot;Review not found&quot;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            SELECT customers.username, inventory.name, reviews.rating, reviews.comment, reviews.status, reviews.review_date</span>
+<span class="sd">            FROM reviews</span>
+<span class="sd">            JOIN customers ON reviews.customer_id = customers.id</span>
+<span class="sd">            JOIN inventory ON reviews.product_id = inventory.id</span>
+<span class="sd">            WHERE reviews.id = %s</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">review_id</span><span class="p">,)</span>
+        <span class="p">)</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">review</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Review not found&quot;</span><span class="p">}),</span> <span class="mi">404</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;product_name&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="s2">&quot;review_date&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="mi">200</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5004</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">application</span> <span class="o">=</span> <span class="n">app</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mohamad lakkis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
