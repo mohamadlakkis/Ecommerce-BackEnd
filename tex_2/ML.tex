@@ -526,6 +526,100 @@ The system includes comprehensive validation to ensure data integrity and approp
   \includegraphics[width=0.9\textwidth]{images/42.png}
   \caption{Documentation HTML (3)}
 \end{figure}
+\section{Additional Features}
+
+\subsection{Security Measures (point 11)}
+\textbf{Security Practices:} To enhance the robustness of the system, several measures have been implemented to prevent common vulnerabilities:
+
+\begin{itemize}
+    \item \textbf{SQL Injection Prevention:}
+    \begin{itemize}
+        \item Prepared Statements and Parameterized Queries are used for all database interactions, ensuring user inputs are never directly concatenated into SQL queries, thereby preventing SQL injection attacks.
+        \item Example:
+        \begin{verbatim}
+        query = "SELECT * FROM customers WHERE username = %s"
+        cursor.execute(query, (username,))
+        \end{verbatim}
+    \end{itemize}
+
+    \item \textbf{Input Validation and Sanitization:}
+    \begin{itemize}
+        \item All inputs are rigorously validated and sanitized at the API layer. 
+        \item For instance, username fields are restricted to alphanumeric characters, and passwords are checked for length and complexity.
+    \end{itemize}
+
+    \item \textbf{Authentication and Authorization:}
+    \begin{itemize}
+        \item The \texttt{bcrypt} library is used to securely hash passwords. Only hashed passwords are stored in the database.
+        \item Role-based access control (RBAC) is enforced. For example:
+        \begin{itemize}
+            \item Only users with the role \texttt{emp} can moderate reviews.
+            \item Customers can only access and modify their own data.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Secure Communication:}
+    \begin{itemize}
+        \item The APIs are designed to run behind HTTPS. For local development, Flask’s \texttt{ssl\_context} is used to enable TLS.
+    \end{itemize}
+
+    \item \textbf{Error Message Minimization:}
+    \begin{itemize}
+        \item Detailed error messages that could reveal internal logic or structure are avoided in production. Generic error messages are displayed to users, while detailed logs are stored for developers.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Advanced Development Practices(point 7)}
+
+\textbf{Custom Exception Handling:} A standardized framework for exception handling has been implemented to ensure clear and consistent error messaging across all services.
+
+\begin{itemize}
+    \item \textbf{Centralized Error Handler:}
+    \begin{itemize}
+        \item Each service includes a centralized error handler that captures exceptions and returns structured JSON responses with appropriate HTTP status codes.
+        \item Example:
+        \begin{verbatim}
+        @app.errorhandler(Exception)
+        def handle_exception(e):
+            return {
+                "error": str(e),
+                "message": "An error occurred. Please try again later."
+            }, 500
+        \end{verbatim}
+    \end{itemize}
+
+    \item \textbf{Service-Specific Exceptions:}
+    \begin{itemize}
+        \item Custom exceptions have been defined for scenarios like \texttt{UserNotFoundException} or \texttt{InsufficientFundsException}.
+        \item These exceptions are caught at the application layer and return user-friendly error messages.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Versioning APIs:} To maintain backward compatibility and support evolving requirements, API versioning has been implemented.
+
+\begin{itemize}
+    \item \textbf{URI-Based Versioning:}
+    \begin{itemize}
+        \item Each service exposes APIs under versioned paths (e.g., \texttt{/v1/customers}, \texttt{/v1/inventory}).
+        \item As APIs evolve, new versions (e.g., \texttt{/v2/customers}) can be introduced without breaking existing clients.
+    \end{itemize}
+
+    \item \textbf{Implementation Details:}
+    \begin{itemize}
+        \item API routers are configured to direct requests to the appropriate version.
+        \item Example:
+        \begin{verbatim}
+        from flask import Blueprint
+        v1 = Blueprint('v1', __name__, url_prefix='/v1')
+        v2 = Blueprint('v2', __name__, url_prefix='/v2')
+
+        # Register blueprints
+        app.register_blueprint(v1)
+        app.register_blueprint(v2)
+        \end{verbatim}
+    \end{itemize}
+\end{itemize}
+
 \section{Conclusion}
 for the rest please see the code :) \\ 
 very nice journey and thank you for your effort and time, in correcting it and reading it, I hope you have a great day!\\

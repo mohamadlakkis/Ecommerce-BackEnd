@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.11.5)  30 NOV 2024 21:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.11.5)  1 DEC 2024 17:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -321,22 +321,22 @@ Overfull \hbox (0.7867pt too wide) in paragraph at lines 71--71
  []
 
 [3]
-<images/1.png, id=251, 1834.855pt x 952.55875pt>
+<images/1.png, id=266, 1834.855pt x 952.55875pt>
 File: images/1.png Graphic file (type png)
 <use images/1.png>
 Package pdftex.def Info: images/1.png  used on input line 86.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/2.png, id=253, 1834.855pt x 952.55875pt>
+<images/2.png, id=268, 1834.855pt x 952.55875pt>
 File: images/2.png Graphic file (type png)
 <use images/2.png>
 Package pdftex.def Info: images/2.png  used on input line 91.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/3.png, id=254, 1834.855pt x 952.55875pt>
+<images/3.png, id=269, 1834.855pt x 952.55875pt>
 File: images/3.png Graphic file (type png)
 <use images/3.png>
 Package pdftex.def Info: images/3.png  used on input line 96.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/4.png, id=255, 1834.855pt x 952.55875pt>
+<images/4.png, id=270, 1834.855pt x 952.55875pt>
 File: images/4.png Graphic file (type png)
 <use images/4.png>
 Package pdftex.def Info: images/4.png  used on input line 101.
@@ -350,17 +350,17 @@ l.103 \end{figure}
                                                   \__shipout_drop_firstpage_...
 l.103 \end{figure}
                    <./images/1.png> <./images/2.png>]
-<images/5.png, id=266, 1834.855pt x 952.55875pt>
+<images/5.png, id=281, 1834.855pt x 952.55875pt>
 File: images/5.png Graphic file (type png)
 <use images/5.png>
 Package pdftex.def Info: images/5.png  used on input line 106.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/6.png, id=267, 1834.855pt x 952.55875pt>
+<images/6.png, id=282, 1834.855pt x 952.55875pt>
 File: images/6.png Graphic file (type png)
 <use images/6.png>
 Package pdftex.def Info: images/6.png  used on input line 111.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/7.png, id=268, 1834.855pt x 952.55875pt>
+<images/7.png, id=283, 1834.855pt x 952.55875pt>
 File: images/7.png Graphic file (type png)
 <use images/7.png>
 Package pdftex.def Info: images/7.png  used on input line 116.
@@ -391,17 +391,17 @@ l.156 \end{longtable}
                                                   \__shipout_drop_firstpage_...
 l.156 \end{longtable}
                       <./images/6.png> <./images/7.png>]
-<images/8.png, id=289, 1834.855pt x 952.55875pt>
+<images/8.png, id=304, 1834.855pt x 952.55875pt>
 File: images/8.png Graphic file (type png)
 <use images/8.png>
 Package pdftex.def Info: images/8.png  used on input line 160.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/9.png, id=290, 1834.855pt x 952.55875pt>
+<images/9.png, id=305, 1834.855pt x 952.55875pt>
 File: images/9.png Graphic file (type png)
 <use images/9.png>
 Package pdftex.def Info: images/9.png  used on input line 165.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/10.png, id=291, 1834.855pt x 952.55875pt>
+<images/10.png, id=306, 1834.855pt x 952.55875pt>
 File: images/10.png Graphic file (type png)
 <use images/10.png>
 Package pdftex.def Info: images/10.png  used on input line 170.
@@ -419,17 +419,17 @@ l.180 \subsubsection
                                                   \__shipout_drop_firstpage_...
 l.180 \subsubsection
                     {APIs} <./images/8.png> <./images/9.png> <./images/10.png>]
-<images/11.png, id=303, 1834.855pt x 952.55875pt>
+<images/11.png, id=318, 1834.855pt x 952.55875pt>
 File: images/11.png Graphic file (type png)
 <use images/11.png>
 Package pdftex.def Info: images/11.png  used on input line 219.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/12.png, id=304, 1834.855pt x 952.55875pt>
+<images/12.png, id=319, 1834.855pt x 952.55875pt>
 File: images/12.png Graphic file (type png)
 <use images/12.png>
 Package pdftex.def Info: images/12.png  used on input line 224.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/13.png, id=305, 1834.855pt x 952.55875pt>
+<images/13.png, id=320, 1834.855pt x 952.55875pt>
 File: images/13.png Graphic file (type png)
 <use images/13.png>
 Package pdftex.def Info: images/13.png  used on input line 229.
@@ -439,7 +439,7 @@ Package pdftex.def Info: images/13.png  used on input line 229.
                                                   \__shipout_drop_firstpage_...
 l.231 \end{figure}
                    <./images/11.png>]
-<images/14.png, id=315, 1834.855pt x 952.55875pt>
+<images/14.png, id=330, 1834.855pt x 952.55875pt>
 File: images/14.png Graphic file (type png)
 <use images/14.png>
 Package pdftex.def Info: images/14.png  used on input line 234.
@@ -462,17 +462,17 @@ l.262 \end{longtable}
                                                   \__shipout_drop_firstpage_...
 l.262 \end{longtable}
                       <./images/12.png> <./images/13.png> <./images/14.png>]
-<images/15.png, id=326, 1834.855pt x 952.55875pt>
+<images/15.png, id=341, 1834.855pt x 952.55875pt>
 File: images/15.png Graphic file (type png)
 <use images/15.png>
 Package pdftex.def Info: images/15.png  used on input line 290.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/16.png, id=327, 1834.855pt x 952.55875pt>
+<images/16.png, id=342, 1834.855pt x 952.55875pt>
 File: images/16.png Graphic file (type png)
 <use images/16.png>
 Package pdftex.def Info: images/16.png  used on input line 295.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/17.png, id=328, 1834.855pt x 952.55875pt>
+<images/17.png, id=343, 1834.855pt x 952.55875pt>
 File: images/17.png Graphic file (type png)
 <use images/17.png>
 Package pdftex.def Info: images/17.png  used on input line 300.
@@ -482,17 +482,17 @@ Package pdftex.def Info: images/17.png  used on input line 300.
                                                   \__shipout_drop_firstpage_...
 l.302 \end{figure}
                    <./images/15.png>]
-<images/18.png, id=337, 1834.855pt x 952.55875pt>
+<images/18.png, id=352, 1834.855pt x 952.55875pt>
 File: images/18.png Graphic file (type png)
 <use images/18.png>
 Package pdftex.def Info: images/18.png  used on input line 305.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/19.png, id=338, 1834.855pt x 952.55875pt>
+<images/19.png, id=353, 1834.855pt x 952.55875pt>
 File: images/19.png Graphic file (type png)
 <use images/19.png>
 Package pdftex.def Info: images/19.png  used on input line 310.
 (pdftex.def)             Requested size: 271.7835pt x 141.08986pt.
-<images/20.png, id=339, 1834.855pt x 952.55875pt>
+<images/20.png, id=354, 1834.855pt x 952.55875pt>
 File: images/20.png Graphic file (type png)
 <use images/20.png>
 Package pdftex.def Info: images/20.png  used on input line 315.
@@ -510,7 +510,7 @@ l.317 \end{figure}
                                                   \__shipout_drop_firstpage_...
 l.317 \end{figure}
                    <./images/16.png> <./images/17.png> <./images/18.png>]
-<images/21.png, id=350, 1834.855pt x 952.55875pt>
+<images/21.png, id=365, 1834.855pt x 952.55875pt>
 File: images/21.png Graphic file (type png)
 <use images/21.png>
 Package pdftex.def Info: images/21.png  used on input line 320.
@@ -547,17 +547,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 393--395
 
  []
 
-<images/22.png, id=373, 1484.54625pt x 543.02875pt>
+<images/22.png, id=388, 1484.54625pt x 543.02875pt>
 File: images/22.png Graphic file (type png)
 <use images/22.png>
 Package pdftex.def Info: images/22.png  used on input line 407.
 (pdftex.def)             Requested size: 271.7835pt x 99.4147pt.
-<images/23.png, id=374, 1484.54625pt x 543.02875pt>
+<images/23.png, id=389, 1484.54625pt x 543.02875pt>
 File: images/23.png Graphic file (type png)
 <use images/23.png>
 Package pdftex.def Info: images/23.png  used on input line 412.
 (pdftex.def)             Requested size: 271.7835pt x 99.4147pt.
-<images/24.png, id=375, 1484.54625pt x 543.02875pt>
+<images/24.png, id=390, 1484.54625pt x 543.02875pt>
 File: images/24.png Graphic file (type png)
 <use images/24.png>
 Package pdftex.def Info: images/24.png  used on input line 417.
@@ -567,17 +567,17 @@ Package pdftex.def Info: images/24.png  used on input line 417.
                                                   \__shipout_drop_firstpage_...
 l.419 \end{figure}
                    <./images/22.png>]
-<images/25.png, id=384, 1481.535pt x 675.52374pt>
+<images/25.png, id=399, 1481.535pt x 675.52374pt>
 File: images/25.png Graphic file (type png)
 <use images/25.png>
 Package pdftex.def Info: images/25.png  used on input line 422.
 (pdftex.def)             Requested size: 271.7835pt x 123.91855pt.
-<images/26.png, id=385, 1481.535pt x 675.52374pt>
+<images/26.png, id=400, 1481.535pt x 675.52374pt>
 File: images/26.png Graphic file (type png)
 <use images/26.png>
 Package pdftex.def Info: images/26.png  used on input line 427.
 (pdftex.def)             Requested size: 271.7835pt x 123.91855pt.
-<images/27.png, id=386, 1481.535pt x 675.52374pt>
+<images/27.png, id=401, 1481.535pt x 675.52374pt>
 File: images/27.png Graphic file (type png)
 <use images/27.png>
 Package pdftex.def Info: images/27.png  used on input line 432.
@@ -595,17 +595,17 @@ l.434 \end{figure}
                                                   \__shipout_drop_firstpage_...
 l.434 \end{figure}
                    <./images/23.png> <./images/24.png> <./images/25.png>]
-<images/28.png, id=397, 1481.535pt x 675.52374pt>
+<images/28.png, id=412, 1481.535pt x 675.52374pt>
 File: images/28.png Graphic file (type png)
 <use images/28.png>
 Package pdftex.def Info: images/28.png  used on input line 437.
 (pdftex.def)             Requested size: 271.7835pt x 123.91855pt.
-<images/29.png, id=398, 1520.68124pt x 168.63pt>
+<images/29.png, id=413, 1520.68124pt x 168.63pt>
 File: images/29.png Graphic file (type png)
 <use images/29.png>
 Package pdftex.def Info: images/29.png  used on input line 444.
 (pdftex.def)             Requested size: 271.7835pt x 30.13852pt.
-<images/30.png, id=399, 1838.87pt x 1284.8pt>
+<images/30.png, id=414, 1838.87pt x 1284.8pt>
 File: images/30.png Graphic file (type png)
 <use images/30.png>
 Package pdftex.def Info: images/30.png  used on input line 453.
@@ -627,12 +627,12 @@ l.455 \end{figure}
                                                   \__shipout_drop_firstpage_...
 l.455 \end{figure}
                    <./images/26.png> <./images/27.png> <./images/28.png> <./images/29.png>]
-<images/31.png, id=412, 1686.3pt x 979.66pt>
+<images/31.png, id=427, 1686.3pt x 979.66pt>
 File: images/31.png Graphic file (type png)
 <use images/31.png>
 Package pdftex.def Info: images/31.png  used on input line 458.
 (pdftex.def)             Requested size: 271.7835pt x 157.88487pt.
-<images/32.png, id=413, 2007.5pt x 1704.3675pt>
+<images/32.png, id=428, 2007.5pt x 1704.3675pt>
 File: images/32.png Graphic file (type png)
 <use images/32.png>
 Package pdftex.def Info: images/32.png  used on input line 466.
@@ -646,12 +646,12 @@ l.469 \subsection
                                                   \__shipout_drop_firstpage_...
 l.469 \subsection
                  {Postman Testing} <./images/30.png> <./images/31.png>]
-<images/33.png, id=420, 1496.59125pt x 755.82375pt>
+<images/33.png, id=435, 1496.59125pt x 755.82375pt>
 File: images/33.png Graphic file (type png)
 <use images/33.png>
 Package pdftex.def Info: images/33.png  used on input line 472.
 (pdftex.def)             Requested size: 271.7835pt x 137.25336pt.
-<images/34.png, id=421, 1513.655pt x 351.3125pt>
+<images/34.png, id=436, 1513.655pt x 351.3125pt>
 File: images/34.png Graphic file (type png)
 <use images/34.png>
 Package pdftex.def Info: images/34.png  used on input line 480.
@@ -665,27 +665,27 @@ l.483 \subsection
                                                   \__shipout_drop_firstpage_...
 l.483 \subsection
                  {Inentory API} <./images/32.png> <./images/33.png>]
-<images/35.png, id=429, 1513.655pt x 351.3125pt>
+<images/35.png, id=444, 1513.655pt x 351.3125pt>
 File: images/35.png Graphic file (type png)
 <use images/35.png>
 Package pdftex.def Info: images/35.png  used on input line 486.
 (pdftex.def)             Requested size: 271.7835pt x 63.07805pt.
-<images/36.png, id=430, 1516.66624pt x 169.63374pt>
+<images/36.png, id=445, 1516.66624pt x 169.63374pt>
 File: images/36.png Graphic file (type png)
 <use images/36.png>
 Package pdftex.def Info: images/36.png  used on input line 492.
 (pdftex.def)             Requested size: 271.7835pt x 30.39557pt.
-<images/37.png, id=431, 1516.66624pt x 169.63374pt>
+<images/37.png, id=446, 1516.66624pt x 169.63374pt>
 File: images/37.png Graphic file (type png)
 <use images/37.png>
 Package pdftex.def Info: images/37.png  used on input line 498.
 (pdftex.def)             Requested size: 271.7835pt x 30.39557pt.
-<images/38.png, id=432, 1810.765pt x 878.28125pt>
+<images/38.png, id=447, 1810.765pt x 878.28125pt>
 File: images/38.png Graphic file (type png)
 <use images/38.png>
 Package pdftex.def Info: images/38.png  used on input line 504.
 (pdftex.def)             Requested size: 271.7835pt x 131.81691pt.
-<images/39.png, id=433, 900.36375pt x 148.555pt>
+<images/39.png, id=448, 900.36375pt x 148.555pt>
 File: images/39.png Graphic file (type png)
 <use images/39.png>
 Package pdftex.def Info: images/39.png  used on input line 509.
@@ -711,17 +711,17 @@ l.512 \section
                                                   \__shipout_drop_firstpage_...
 l.512 \section
               {Documentation HTML} <./images/34.png> <./images/35.png> <./images/36.png> <./images/37.png> <./images/38.png>]
-<images/40.png, id=449, 1600.98125pt x 988.69376pt>
+<images/40.png, id=465, 1600.98125pt x 988.69376pt>
 File: images/40.png Graphic file (type png)
 <use images/40.png>
 Package pdftex.def Info: images/40.png  used on input line 516.
 (pdftex.def)             Requested size: 407.66833pt x 251.74396pt.
-<images/41.png, id=450, 1600.98125pt x 988.69376pt>
+<images/41.png, id=466, 1600.98125pt x 988.69376pt>
 File: images/41.png Graphic file (type png)
 <use images/41.png>
 Package pdftex.def Info: images/41.png  used on input line 521.
 (pdftex.def)             Requested size: 407.66833pt x 251.74396pt.
-<images/42.png, id=451, 1600.98125pt x 988.69376pt>
+<images/42.png, id=467, 1600.98125pt x 988.69376pt>
 File: images/42.png Graphic file (type png)
 <use images/42.png>
 Package pdftex.def Info: images/42.png  used on input line 526.
@@ -734,36 +734,51 @@ l.528 \end{figure}
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.528 \end{figure}
-                   <./images/39.png> <./images/40.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 530--532
+                   <./images/39.png> <./images/40.png>] [21pdfTeX warning (ext4): destination with the same identifier (name{figure.41}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.537         \item P
+                     repared Statements and Parameterized Queries are used f...pdfTeX warning (ext4): destination with the same identifier (name{figure.42}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.537         \item P
+                     repared Statements and Parameterized Queries are used f... <./images/41.png> <./images/42.png>]
+Overfull \hbox (40.6817pt too wide) in paragraph at lines 588--588
+ []                \OT1/cmtt/m/n/12 "message": "An error occurred. Please try again later."[] 
+ []
+
+[22]
+Overfull \hbox (7.00925pt too wide) in paragraph at lines 593--594
+[]\OT1/cmr/m/n/12 Custom ex-cep-tions have been de-fined for sce-nar-ios like \OT1/cmtt/m/n/12 UserNotFoundException
+ []
+
+
+Overfull \hbox (52.55913pt too wide) in paragraph at lines 603--604
+[]\OT1/cmr/m/n/12 Each ser-vice ex-poses APIs un-der ver-sioned paths (e.g., \OT1/cmtt/m/n/12 /v1/customers\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 /v1/inventory\OT1/cmr/m/n/12 ). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--626
 
  []
 
-[21pdfTeX warning (ext4): destination with the same identifier (name{figure.41}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.532 \end{document}
-                    pdfTeX warning (ext4): destination with the same identifier (name{figure.42}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.532 \end{document}
-                     <./images/41.png> <./images/42.png>] (./ML.aux)
+[23] (./ML.aux)
 Package rerunfilecheck Info: File `ML.out' has not changed.
-(rerunfilecheck)             Checksum: 76757305728B07AA52D16D1B836582D8;7068.
+(rerunfilecheck)             Checksum: 947A7DD38D0DECBC81A27E1C760A6F8F;7696.
  ) 
 Here is how much of TeX's memory you used:
- 9265 strings out of 480171
- 145512 string characters out of 5894489
- 445455 words of memory out of 5000000
- 26956 multiletter control sequences out of 15000+600000
+ 9274 strings out of 480171
+ 145636 string characters out of 5894489
+ 445458 words of memory out of 5000000
+ 26960 multiletter control sequences out of 15000+600000
  475280 words of font info for 48 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 60i,7n,63p,703b,524s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,7n,63p,703b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/mnl/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ML.pdf (21 pages, 3799027 bytes).
+Output written on ML.pdf (23 pages, 3806764 bytes).
 PDF statistics:
- 525 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 126 named destinations out of 1000 (max. 500000)
- 571 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 550 PDF objects out of 1000 (max. 8388607)
+ 427 compressed objects within 5 object streams
+ 131 named destinations out of 1000 (max. 500000)
+ 595 words of extra memory for PDF output out of 10000 (max. 10000000)
 

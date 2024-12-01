@@ -42,4 +42,7 @@
 \contentsline {subsection}{\numberline {7.4}Sales API}{19}{subsection.7.4}%
 \contentsline {section}{\numberline {8}Performance, memory, and code coverage profiling}{19}{section.8}%
 \contentsline {section}{\numberline {9}Documentation HTML}{20}{section.9}%
-\contentsline {section}{\numberline {10}Conclusion}{21}{section.10}%
+\contentsline {section}{\numberline {10}Additional Features}{21}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Security Measures (point 11)}{21}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Advanced Development Practices(point 7)}{22}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Conclusion}{23}{section.11}%
